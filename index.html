@@ -178,7 +178,13 @@ function calculateStatus() {
   forfeitXP = xp;
   steps += "<li>Forfeited remaining " + forfeitXP + " XP, as it's less than a multiple of 300 and cannot be rolled over or converted.<p></li>";
 
-  document.getElementById('result').innerHTML = steps + "<h3 class='bold'>Summary:</h3><p>Initial XP: " + initialXP + "</p><p>Rolled over XP for next year: " + rolloverXP + "</p><p>Total years towards Platinum for Life: " + years + "</p><p>Forfeited XP: " + forfeitXP + "</p>";
+  if (years >= 10) {
+      document.getElementById('result').innerHTML = steps + "<h3 class='bold'>Summary:</h3><p>Initial XP: " + initialXP + "</p><p>Rolled over XP for next year: " + rolloverXP + "</p><p>Total years towards Platinum for Life: " + years + "</p><p>Forfeited XP: " + forfeitXP + "</p><p><b>You have at least 10 years in your PFL counter, so you will immediately qualify for PFL on your first qualification date within the transition period.</b></p>";
+  } else {
+      moreYears = 10 - years;
+      moreEarn = 300 - rolloverXP;
+      document.getElementById('result').innerHTML = steps + "<h3 class='bold'>Summary:</h3><p>Initial XP: " + initialXP + "</p><p>Rolled over XP for next year: " + rolloverXP + "</p><p>Total years towards Platinum for Life: " + years + "</p><p>Forfeited XP: " + forfeitXP + "</p><p><b>You will have " + years + " years in your PFL counter, and will need to re-qualify " + moreYears + " time(s) before you earn PFL. You will start your following year with " + rolloverXP + " XP already in your account.</b></p><p><b>You will need to earn " + moreEarn + " XP in the following year to remain platinum once again.</b></p>";
+  }
 }
 </script>
 
