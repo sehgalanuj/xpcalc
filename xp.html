@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platinum Status Calculator</title>
+<script>
+function calculatePlatinumStatus() {
+  // Get values from input fields
+  let xp = parseInt(document.getElementById('xp').value, 10);
+  let years = parseInt(document.getElementById('years').value, 10);
+  let initialXP = xp; // Keep track of the initial XP for summary
+  let rolloverXP = 0;
+  let forfeitXP = 0;
+  let summary = "";
+
+  // Step 1: Deduct XP for this year's qualification
+  if (xp >= 300) {
+    xp -= 300;
+    years += 1;
+    summary += "<p>- Deducted 300 XP for this year's qualification. Years towards platinum for life is now " + years + ".</p>";
+  }
+
+  // Step 2: Deduct XP for next year's rollover
+  if (xp > 300) {
+    rolloverXP = 300;
+    xp -= 300;
+    summary += "<p>- Deducted another 300 XP for next year's rollover, leaving " + xp + " XP.</p>";
+  } else {
+    rolloverXP = xp;
+    xp = 0;
+    summary += "<p>- Next year's rollover, " + rolloverXP + " XP.</p>";    
+  }
+
+  // Step 3: Convert XP to additional years towards Platinum for Life
+  i = 1;  
+  while (xp >= 300) {
+    years += 1;
+    xp -= 300;
+    i += 1;
+  }
+  if (i > 0) {    
+    summary += "<p>- Converted 300 XP to an additional year towards Platinum for Life. Total years now " + years + ".</p>";
+  }
+
+  // Step 4: Forfeit any remaining XP less than 300
+  forfeitXP = xp;
+  if (forfeitXP > 0) {
+    summary += "<p>- Forfeited remaining " + forfeitXP + " XP, as it's less than 300 and cannot be rolled over or converted.</p>";
+  }
+
+  // Display the results
+  document.getElementById('steps').innerHTML = summary;
+  document.getElementById('summary').innerHTML = `
+    <p>Initial XP: ${initialXP}</p>
+    <p>Rolled over XP for next year: ${rolloverXP}</p>
+    <p>Total years towards Platinum for Life: ${years}</p>
+    <p>XP forfeited: ${forfeitXP}</p>
+  `;
+}
+</script>
+</head>
+<body>
+
+<h2>Platinum Status Calculator</h2>
+
+<label for="xp">Enter XP:</label>
+<input type="number" id="xp" name="xp" value="901" min="0"><br><br>
+
+<label for="years">Years towards Platinum for Life:</label>
+<input type="number" id="years" name="years" value="7" min="0"><br><br>
+
+<button onclick="calculatePlatinumStatus()">Calculate Status</button>
+
+<div id="steps"></div>
+<h3>Summary:</h3>
+<div id="summary"></div>
+
+</body>
+</html>
