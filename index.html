@@ -46,7 +46,7 @@ function calculatePlatinumStatus() {
   // Step 4: Forfeit any remaining XP less than 300
   forfeitXP = xp;
   if (forfeitXP > 0) {
-    summary += "<p>- Forfeited remaining " + forfeitXP + " XP, as it's less than 300 and cannot be rolled over or converted.</p>";
+    summary += "<p>- Forfeited remaining " + forfeitXP + " XP, as it's less than a multiple of 300 and cannot be rolled over or converted.</p>";
   }
 
   // Display the results
