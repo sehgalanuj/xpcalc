@@ -145,20 +145,21 @@ function calculateStatus() {
   var forfeitXP = 0;
   var steps = "";
 
+    steps += "<ul>"
   if (xp >= 300) {
     xp -= 300;
     years++;
-    steps += "<p>- Deducted 300 XP for this year's qualification. Years towards platinum for life is now " + years + ".</p>";
+    steps += "<li>Deducted 300 XP for this year's qualification. Years towards platinum for life is now " + years + ".<p></li>";
   }
 
   if (xp >= 300) {
     rolloverXP = 300;
     xp -= 300;
-    steps += "<p>- Deducted another 300 XP for next year's rollover, leaving " + xp + " XP.</p>";
+    steps += "<li>Deducted another 300 XP for next year's rollover, leaving " + xp + " XP.<p></li>";
   } else {
     rolloverXP = xp;
     xp = 0;
-    summary += "<p>- Next year's rollover, " + rolloverXP + " XP.</p>";    
+    summary += "<li>Next year's rollover, " + rolloverXP + " XP.<p></li>";    
   }
 
   i = 0;
@@ -168,13 +169,14 @@ function calculateStatus() {
     i += 1;
   }
 
-  if (i >0) {
-      steps += "<p>- Converted 300 XP to an additional year towards Platinum for Life. Total years now " + years + ".</p>";
+  if (i > 0) {
+      convertedXP = i * 300;
+      steps += "<li>Converted multiples of 300 XP, i.e. " + convertedXP + " XP to additional year(s) towards Platinum for Life. Total years now " + years + ".<p></li>";
   }
 
 
   forfeitXP = xp;
-  steps += "<p>- Forfeited remaining " + forfeitXP + " XP, as it's less than a multiple of 300 and cannot be rolled over or converted.</p>";
+  steps += "<li>Forfeited remaining " + forfeitXP + " XP, as it's less than a multiple of 300 and cannot be rolled over or converted.<p></li>";
 
   document.getElementById('result').innerHTML = steps + "<h3 class='bold'>Summary:</h3><p>Initial XP: " + initialXP + "</p><p>Rolled over XP for next year: " + rolloverXP + "</p><p>Total years towards Platinum for Life: " + years + "</p><p>Forfeited XP: " + forfeitXP + "</p>";
 }
