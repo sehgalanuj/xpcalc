@@ -35,6 +35,19 @@
       margin-bottom: 1rem;
   }
 
+  /* Styles for hyperlinks */
+  a {
+      color: #007bff; /* Bootstrap's default blue for hyperlinks */
+      text-decoration: none; /* Removes underline */
+      transition: color 0.2s; /* Smooth color transition on hover */
+  }
+       
+   a:hover,
+   a:focus {
+       color: #0056b3; /* Darker blue on hover/focus for better visibility */
+       text-decoration: underline; /* Adds underline on hover/focus */
+   }
+
   .disclaimer {
       font-size: 0.75rem; /* Small text size */
       text-align: center;
@@ -176,7 +189,7 @@
   <div class="result-section" id="result"></div>
 
   <div class="disclaimer">
-The calculator is intended solely for informational and illustrative purposes, drawing upon the most reliable data currently accessible and interpretations from the Flying Blue website and the FlyerTalk forum. It should not be considered as guidance, and the information it offers does not carry any obligation or guarantee.
+The calculator is intended solely for informational and illustrative purposes, drawing upon the most reliable data currently accessible and interpretations from the <a href="https://www.flyingblue.com/en/news/surplus-xp-capping">Flying Blue website</a> and the <a href="https://www.flyertalk.com/forum/air-france-klm-other-partners-flying-blue/2139884-will-xp-rollover-become-limited-2025-a.html">FlyerTalk forum</a>. It should not be considered as guidance, and the information it offers does not carry any obligation or guarantee.
   </div>
 
 </div>
