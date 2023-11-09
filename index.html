@@ -96,6 +96,43 @@
     font-weight: bold;
   }
 
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 5px;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   /* Additional responsive design */
   @media (max-width: 768px) {
     body {
@@ -135,6 +172,14 @@
 
 </div>
 
+<!-- Error Modal -->
+<div id="errorModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modalText">Some text in the Modal..</p>
+  </div>
+</div>
+
 <script>
 function calculateStatus() {
   var xp = document.getElementById('xp').value;
@@ -159,7 +204,7 @@ function calculateStatus() {
   } else {
     rolloverXP = xp;
     xp = 0;
-    summary += "<li>Next year's rollover, " + rolloverXP + " XP.<p></li>";    
+    steps += "<li>Next year's rollover, " + rolloverXP + " XP.<p></li>";    
   }
 
   i = 0;
@@ -186,6 +231,48 @@ function calculateStatus() {
       document.getElementById('result').innerHTML = steps + "<h3 class='bold'>Summary:</h3><p>Initial XP: " + initialXP + "</p><p>Rolled over XP for next year: " + rolloverXP + "</p><p>Total years towards Platinum for Life: " + years + "</p><p>Forfeited XP: " + forfeitXP + "</p><p><b>You will have " + years + " years in your PFL counter, and will need to re-qualify " + moreYears + " time(s) before you earn PFL. You will start your following year with " + rolloverXP + " XP already in your account.</b></p><p><b>You will need to earn " + moreEarn + " XP in the following year to remain platinum once again.</b></p>";
   }
 }
+
+
+// Validation function to check for numeric inputs
+function validateInput() {
+  var xpInput = document.getElementById('xp');
+  var yearsInput = document.getElementById('years');
+  var modal = document.getElementById('errorModal');
+  var span = document.getElementsByClassName("close")[0];
+  var modalText = document.getElementById("modalText");
+
+  xpInput.addEventListener('input', function(e) {
+    if (!e.target.validity.valid) {
+      modalText.textContent = "Please enter only numbers in the Enter XP field.";
+      modal.style.display = "block";
+      xpInput.value = '';
+    }
+  });
+
+  yearsInput.addEventListener('input', function(e) {
+    if (!e.target.validity.valid) {
+      modalText.textContent = "Please enter only numbers in the Years toward PFL field.";
+      modal.style.display = "block";
+      yearsInput.value = '';
+    }
+  });
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+// Call validateInput function to activate the validation checks
+validateInput();
+  
 </script>
 
 </body>
